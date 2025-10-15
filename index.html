@@ -1,1 +1,76 @@
-hello cassius, francis, and hunter
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Click the Box Game</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #ff9a9e, #fad0c4);
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      color: #fff;
+      margin-top: 30px;
+    }
+    #gameArea {
+      position: relative;
+      width: 100%;
+      height: 80vh;
+      overflow: hidden;
+    }
+    #box {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background-color: #4facfe;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    #score {
+      font-size: 24px;
+      color: #fff;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Click the Moving Box!</h1>
+  <div id="score">Score: 0</div>
+  <div id="gameArea">
+    <div id="box"></div>
+  </div>
+
+  <script>
+    const box = document.getElementById('box');
+    const scoreDisplay = document.getElementById('score');
+    let score = 0;
+
+    function moveBox() {
+      const gameArea = document.getElementById('gameArea');
+      const maxX = gameArea.clientWidth - box.clientWidth;
+      const maxY = gameArea.clientHeight - box.clientHeight;
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+      box.style.left = `${x}px`;
+      box.style.top = `${y}px`;
+    }
+
+    box.addEventListener('click', () => {
+      score++;
+      scoreDisplay.textContent = `Score: ${score}`;
+      moveBox();
+    });
+
+    // Move the box every 2 seconds
+    setInterval(moveBox, 2000);
+
+    // Initial position
+    moveBox();
+  </script>
+</body>
+</html>
